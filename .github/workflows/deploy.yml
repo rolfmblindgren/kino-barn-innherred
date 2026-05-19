@@ -1,0 +1,58 @@
+name: deploy-nyttekalkulator
+
+on:
+  push:
+    branches: ["main", "master"]
+  workflow_dispatch:
+
+env:
+  APP_NAME: ${{ github.event.repository.name }}
+  DEPLOY_HOST: ${{ vars.DEPLOY_HOST || 'dnsgrendel.grendel.no' }}
+  DEPLOY_USER: ${{ vars.DEPLOY_USER || 'deployshiny' }}
+  DEPLOY_GROUP: ${{ vars.DEPLOY_GROUP || 'shinyapps' }}
+  SHINY_SERVICE: ${{ vars.SHINY_SERVICE || 'shiny-server' }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Sjekk ut kode
+        uses: actions/checkout@v6
+
+      - name: Sjekk deploy-variabler
+        run: |
+          : "${DEPLOY_HOST:?Set repository variable DEPLOY_HOST or use the default}"
+          : "${DEPLOY_USER:?Set repository variable DEPLOY_USER or use the default}"
+          : "${SHINY_SERVICE:?Set repository variable SHINY_SERVICE or use the default}"
+
+      - name: Sett opp SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SHINY_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "${DEPLOY_HOST}" >> ~/.ssh/known_hosts
+
+      - name: Sørg for at appmappa finnes
+        run: |
+          ssh "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "mkdir -p /srv/shiny-server/${APP_NAME}"
+
+      - name: Synkroniser appfiler til server
+        run: |
+          rsync -avz --delete \
+            --mkpath \
+            ./ \
+            --chown=${DEPLOY_USER}:${DEPLOY_GROUP} \
+            --chmod=D775,F664 \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '.gitignore' \
+            --exclude '.Rproj.user' \
+            --exclude '.Rhistory' \
+            --exclude '.RData' \
+            ${DEPLOY_USER}@${DEPLOY_HOST}:/srv/shiny-server/${APP_NAME}/
+
+      - name: Restart Shiny Server
+        run: |
+          ssh "${DEPLOY_USER}@${DEPLOY_HOST}" "sudo systemctl restart ${SHINY_SERVICE}"
