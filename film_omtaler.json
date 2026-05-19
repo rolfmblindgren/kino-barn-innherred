@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-05-18T22:49:32.015706+00:00",
+  "model": "gpt-4.1-mini",
+  "movies": {
+    "Diplodocus og den magiske hokus pokus": {
+      "kort_omtale": "En liten dinosaur legger ut på et spennende eventyr for å redde foreldrene sine med hjelp fra en trollmann og vitenskapsmenn.",
+      "passer_for": "Barn fra 6 år, familier som liker animasjon og eventyr",
+      "foreldre_merknad": "Filmen er på norsk med norsk tekst. Passer for barn fra 6 år.",
+      "kilder": [
+        "https://www.nfkino.no/film/diplodocus-og-den-magiske-hokus-pokus"
+      ]
+    },
+    "KPop Demon Hunters, Sing-along": {
+      "kort_omtale": "K-pop-stjerner kjemper mot demoner i en spennende animasjonsfilm med sang og dans. Bli med på en unik sing-along kinoopplevelse!",
+      "passer_for": "Barn fra 9 år som liker musikk, eventyr og animasjon med engelsk tale.",
+      "foreldre_merknad": "Filmen har engelsk tale og sangtekster, vises uten norsk teksting. Passer fra 9 år.",
+      "kilder": [
+        "https://www.nfkino.no/film/kpop-demon-hunters-sing-along"
+      ]
+    },
+    "Sauedetektivene": {
+      "kort_omtale": "Sauedetektivene er en morsom og spennende familiefilm om modige sauer som løser et mysterium.",
+      "passer_for": "Barn fra 6 år, familier som liker komedie og spennende historier.",
+      "foreldre_merknad": "Filmen har norsk tale og tekst, passer for barn fra 6 år.",
+      "kilder": [
+        "https://www.nfkino.no/film/sauedetektivene"
+      ]
+    },
+    "Super Mario Galaxy filmen": {
+      "kort_omtale": "Mario og Luigi reiser i verdensrommet og utforsker nye galakser med spennende utfordringer.",
+      "passer_for": "Barn fra 6 år, familier som liker animasjon og eventyr.",
+      "foreldre_merknad": "Filmen har norsk tale og tekst, anbefalt fra 6 år.",
+      "kilder": [
+        "https://www.nfkino.no/film/super-mario-galaxy-filmen"
+      ]
+    },
+    "The Amazing Digital Circus: The Last Act": {
+      "kort_omtale": "The Amazing Digital Circus avsluttes i denne spennende filmen. Pomni og gjengen oppdager hemmeligheter om sirkuset i siste akt.",
+      "passer_for": "Barn og ungdom fra 12 år som liker animasjon, drama og thriller.",
+      "foreldre_merknad": "Filmen har engelsk tale og teksting. Anbefalt fra 12 år på grunn av tema og spenning.",
+      "kilder": [
+        "https://www.nfkino.no/film/amazing-digital-circus-last-act"
+      ]
+    }
+  }
+}

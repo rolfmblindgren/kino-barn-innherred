@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barnefilmer i Verdal og Steinkjer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Kinoprogram</p>
+        <h1>Barnefilmer i Verdal og Steinkjer</h1>
+      </div>
+      <div class="header-actions">
+        <a class="button secondary" href="barnefilmer_kino.csv" download>Last ned CSV</a>
+        <button class="button primary" id="refreshButton" type="button">Les CSV på nytt</button>
+      </div>
+    </header>
+
+    <section class="toolbar" aria-label="Filtre">
+      <label>
+        Søk
+        <input id="searchInput" type="search" placeholder="Film, sal eller språk">
+      </label>
+      <label>
+        Kino
+        <select id="cinemaFilter">
+          <option value="">Alle kinoer</option>
+        </select>
+      </label>
+      <label>
+        Fra dato
+        <input id="fromDate" type="date">
+      </label>
+      <label>
+        Til dato
+        <input id="toDate" type="date">
+      </label>
+      <button class="button secondary toolbar-button" id="clearFiltersButton" type="button">Nullstill filter</button>
+    </section>
+
+    <section class="summary" aria-label="Oppsummering">
+      <div>
+        <span id="showingCount">0</span>
+        <strong>visninger</strong>
+      </div>
+      <div>
+        <span id="movieCount">0</span>
+        <strong>filmer</strong>
+      </div>
+      <div>
+        <span id="dateRange">-</span>
+        <strong>periode</strong>
+      </div>
+    </section>
+
+    <section class="table-section">
+      <div class="table-header">
+        <h2>Visninger</h2>
+        <p id="statusText">Laster CSV ...</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Dato</th>
+              <th>Tid</th>
+              <th>Kino</th>
+              <th>Film</th>
+              <th>Sal</th>
+              <th>Alder</th>
+              <th>Språk og tekst</th>
+            </tr>
+          </thead>
+          <tbody id="showingsBody"></tbody>
+        </table>
+      </div>
+      <p class="empty-state" id="emptyState" hidden>Ingen visninger passer filtrene.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
