@@ -66,6 +66,8 @@ Da skrives `film_omtaler.json`, som webappen viser under filmtitlene.
 
 Merk: Dette er scraping av offentlige nettsider, ikke et offisielt API. Hvis kinoene endrer nettsidene sine, kan scriptet måtte justeres.
 
+## Coda
+
 From web-lit screens it gathers days with care  
 It sorts the films that children want to see  
 And lays the times in rows both clean and fair  
