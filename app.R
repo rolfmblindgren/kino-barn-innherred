@@ -1,18 +1,16 @@
 library(shiny)
 library(jsonlite)
+library(yaml)
 library(grendelshiny)
 library(shinyseo)
 
 csv_file <- "barnefilmer_kino.csv"
 omtaler_file <- "film_omtaler.json"
 
-app_title <- "Barnefilmer i Verdal og Steinkjer"
-app_description <- paste(
-  "Oppdatert oversikt over barne- og ungdomsfilmer på Verdal kino og",
-  "Steinkjer kino, med dato, klokkeslett, sal og korte norske filmomtaler."
-)
-app_url <- Sys.getenv("KINO_BARN_URL", "https://grendel.no/kino-barn/")
-app_image <- Sys.getenv("KINO_BARN_IMAGE", "https://grendel.no/kino-barn/share.png")
+app_meta <- yaml::read_yaml("meta.yaml")
+app_meta$url   <- Sys.getenv("KINO_BARN_URL",   app_meta$url)
+app_meta$image <- Sys.getenv("KINO_BARN_IMAGE", app_meta$image)
+app_title <- app_meta$title
 
 read_showings <- function() {
   if (!file.exists(csv_file)) {
@@ -58,19 +56,7 @@ has_date <- function(x) {
 ui <- fluidPage(
   tags$head(
     tags$title(app_title),
-    shinyseo::social_meta(list(
-      title = app_title,
-      description = app_description,
-      url = app_url,
-      image = app_image,
-      image_alt = "Oversikt over barnefilmer i Verdal og Steinkjer",
-      locale = "nb_NO",
-      site_name = "Grendel",
-      application_category = "EntertainmentApplication",
-      is_accessible_for_free = TRUE,
-      author_name = "Rolf M. Lindgren",
-      publisher_name = "Grendel"
-    )),
+    shinyseo::social_meta(app_meta),
     grendelshiny::grendelshiny_css(),
     grendelshiny::grendelshiny_js(),
     tags$script(HTML("
