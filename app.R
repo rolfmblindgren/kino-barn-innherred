@@ -57,6 +57,13 @@ ui <- fluidPage(
   tags$head(
     tags$title(app_title),
     shinyseo::social_meta(app_meta),
+    tags$link(rel = "manifest", href = "manifest.json"),
+    tags$link(rel = "apple-touch-icon", href = "apple-touch-icon.png"),
+    tags$meta(name = "theme-color", content = app_meta$theme_color),
+    tags$meta(name = "mobile-web-app-capable", content = "yes"),
+    tags$meta(name = "apple-mobile-web-app-capable", content = "yes"),
+    tags$meta(name = "apple-mobile-web-app-status-bar-style", content = "black-translucent"),
+    tags$meta(name = "apple-mobile-web-app-title", content = app_meta$title),
     grendelshiny::grendelshiny_css(),
     grendelshiny::grendelshiny_js(),
     tags$script(HTML("
@@ -71,6 +78,51 @@ ui <- fluidPage(
           field.dispatchEvent(new Event('change', { bubbles: true }));
         });
       });
+
+      (function () {
+        var STORAGE_KEY = 'kinoBarnSeenFilms';
+
+        $(document).on('shiny:value', function (event) {
+          if (event.target.id !== 'film_list') {
+            return;
+          }
+
+          setTimeout(function () {
+            var items = document.querySelectorAll('#film_list [data-film]');
+            if (!items.length) {
+              return;
+            }
+
+            var stored = null;
+            try {
+              stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            } catch (e) {
+              stored = null;
+            }
+
+            var seen = Array.isArray(stored) ? stored : null;
+            var current = [];
+
+            items.forEach(function (item) {
+              var film = item.getAttribute('data-film');
+              current.push(film);
+
+              if (seen !== null && seen.indexOf(film) === -1 && !item.querySelector('.film-badge-new')) {
+                var badge = document.createElement('span');
+                badge.className = 'film-badge-new';
+                badge.textContent = 'Ny!';
+                item.appendChild(badge);
+              }
+            });
+
+            try {
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(current));
+            } catch (e) {
+              /* localStorage utilgjengelig - hopper over lagring */
+            }
+          }, 0);
+        });
+      })();
     ")),
     tags$style(HTML("
       .kino-grid {
@@ -189,6 +241,38 @@ ui <- fluidPage(
         text-align: center;
       }
 
+      .film-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .film-list li {
+        padding: 10px 14px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.04);
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .film-badge-new {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: #176b5f;
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
       @media (max-width: 760px) {
         .kino-grid {
           grid-template-columns: 1fr;
@@ -231,9 +315,8 @@ ui <- fluidPage(
     ),
     div(
       class = "hero-panel",
-      h2("Slik virker den"),
-      p("CSV-en kan oppdateres med Python-scriptet. Shiny-appen leser filene fra samme mappe."),
-      p("Filmomtaler ligger i JSON, slik at visningsdata og AI-tekst kan oppdateres hver for seg.")
+      h2("Aktuelle filmer"),
+      uiOutput("film_list")
     )
   ),
   div(
@@ -308,6 +391,22 @@ server <- function(input, output, session) {
       "Kino",
       choices = c("Alle kinoer" = "", cinemas),
       selected = input$cinema %||% ""
+    )
+  })
+
+  output$film_list <- renderUI({
+    rows <- showings()
+    films <- sort(unique(rows$film %||% character()))
+
+    if (length(films) == 0) {
+      return(p(class = "hero-text", "Ingen filmer i programmet for øyeblikket."))
+    }
+
+    tags$ul(
+      class = "film-list",
+      lapply(films, function(film) {
+        tags$li(`data-film` = film, film)
+      })
     )
   })
 

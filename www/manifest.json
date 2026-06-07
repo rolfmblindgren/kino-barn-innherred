@@ -1,0 +1,23 @@
+{
+  "name": "Barnefilmer i Verdal og Steinkjer",
+  "short_name": "Kino Barn",
+  "description": "Oversikt over barne- og familiefilmer på Verdal kino og Steinkjer kino.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#176b5f",
+  "lang": "nb-NO",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
