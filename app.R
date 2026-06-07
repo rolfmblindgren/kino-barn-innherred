@@ -276,6 +276,18 @@ ui <- fluidPage(
         box-shadow: none;
       }
 
+      .hero-badges a.hero-badge {
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      }
+
+      .hero-badge-active {
+        background: #176b5f !important;
+        border-color: #176b5f !important;
+        color: #ffffff !important;
+      }
+
       .hero-mark span {
         color: #ffffff;
         font-size: 24px;
@@ -328,11 +340,7 @@ ui <- fluidPage(
         class = "hero-text",
         "Datoer, klokkeslett og korte omtaler for filmer som kan passe barn og ungdom."
       ),
-      div(
-        class = "hero-badges",
-        span(class = "hero-badge", "Verdal"),
-        span(class = "hero-badge", "Steinkjer")
-      )
+      uiOutput("cinema_badges")
     ),
     div(
       class = "hero-panel",
@@ -392,6 +400,30 @@ server <- function(input, output, session) {
     updateTextInput(session, "search", value = "")
     updateSelectInput(session, "cinema", selected = "")
     session$sendCustomMessage("clearDateFilters", list())
+  })
+
+  toggle_cinema <- function(name) {
+    current <- input$cinema %||% ""
+    new_value <- if (identical(current, name)) "" else name
+    updateSelectInput(session, "cinema", selected = new_value)
+  }
+
+  observeEvent(input$badge_verdal, toggle_cinema("Verdal"))
+  observeEvent(input$badge_steinkjer, toggle_cinema("Steinkjer"))
+
+  output$cinema_badges <- renderUI({
+    selected <- input$cinema %||% ""
+
+    badge <- function(id, label) {
+      cls <- if (identical(selected, label)) "hero-badge hero-badge-active" else "hero-badge"
+      actionLink(id, label, class = cls)
+    }
+
+    div(
+      class = "hero-badges",
+      badge("badge_verdal", "Verdal"),
+      badge("badge_steinkjer", "Steinkjer")
+    )
   })
 
   showings <- reactive({
