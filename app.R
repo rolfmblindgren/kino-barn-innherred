@@ -265,15 +265,19 @@ ui <- fluidPage(
         align-self: start;
       }
 
+      .hero-header {
+        align-items: center;
+      }
+
       .hero-mark {
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: 56px;
-        height: 56px;
-        border-radius: 18px;
-        background: #176b5f;
-        box-shadow: none;
+      }
+
+      .hero-mark img {
+        display: block;
+        height: 48px;
+        width: auto;
       }
 
       .hero-badges a.hero-badge {
@@ -286,13 +290,6 @@ ui <- fluidPage(
         background: #176b5f !important;
         border-color: #176b5f !important;
         color: #ffffff !important;
-      }
-
-      .hero-mark span {
-        color: #ffffff;
-        font-size: 24px;
-        font-weight: 800;
-        line-height: 1;
       }
 
       .film-badge-new {
@@ -329,7 +326,7 @@ ui <- fluidPage(
       class = "hero-copy",
       div(
         class = "hero-header",
-        div(class = "hero-mark", span("K")),
+        div(class = "hero-mark", tags$img(src = "grendel-mark.png", alt = "Grendel")),
         div(
           class = "hero-heading",
           p(class = "eyebrow", "Kinoprogram"),
