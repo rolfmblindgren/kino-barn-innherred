@@ -261,42 +261,8 @@ ui <- fluidPage(
         gap: 8px;
       }
 
-      .poster-section {
-        margin-top: 28px;
-      }
-
-      .poster-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-      }
-
-      .poster-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-        text-align: center;
-      }
-
-      .poster-art {
-        width: 100%;
-        aspect-ratio: 2 / 3;
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #ffffff;
-        font-size: 26px;
-        font-weight: 800;
-        letter-spacing: 0.03em;
-      }
-
-      .poster-title {
-        margin: 0;
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 1.3;
+      .sidebar-card {
+        align-self: start;
       }
 
       .film-badge-new {
@@ -377,11 +343,6 @@ ui <- fluidPage(
         class = "toolbar-actions",
         actionButton("clear_filters", "Nullstill"),
         actionButton("reload_files", "Les filer på nytt")
-      ),
-      div(
-        class = "poster-section",
-        h2("Filmplakater"),
-        uiOutput("film_posters")
       )
     ),
     div(
@@ -450,31 +411,6 @@ server <- function(input, output, session) {
         tags$li(`data-film` = film, film)
       })
     )
-  })
-
-  poster_palette <- c("#176b5f", "#2f8f7e", "#d9824b", "#5b6ee1", "#c75c8a", "#3f9bd1")
-
-  output$film_posters <- renderUI({
-    rows <- showings()
-    films <- sort(unique(rows$film %||% character()))
-
-    if (length(films) == 0) {
-      return(p(class = "hero-text", "Ingen filmer i programmet for øyeblikket."))
-    }
-
-    cards <- lapply(seq_along(films), function(index) {
-      film <- films[index]
-      color <- poster_palette[((index - 1) %% length(poster_palette)) + 1]
-      initials <- toupper(substr(film, 1, 2))
-
-      div(
-        class = "poster-card",
-        div(class = "poster-art", style = paste0("background:", color, ";"), initials),
-        p(class = "poster-title", film)
-      )
-    })
-
-    div(class = "poster-grid", cards)
   })
 
   filtered_showings <- reactive({
