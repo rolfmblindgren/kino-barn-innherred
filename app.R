@@ -315,7 +315,7 @@ ui <- fluidPage(
       class = "hero-copy",
       div(
         class = "hero-header",
-        div(class = "hero-mark", tags$img(src = "grendel-mark.png", alt = "Grendel")),
+        div(class = "hero-mark", grendelshiny::grendel_mark()),
         div(
           class = "hero-heading",
           p(class = "eyebrow", "Kinoprogram"),
