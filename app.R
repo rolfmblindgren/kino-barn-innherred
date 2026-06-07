@@ -407,19 +407,21 @@ server <- function(input, output, session) {
 
   observeEvent(input$badge_verdal, toggle_cinema("Verdal"))
   observeEvent(input$badge_steinkjer, toggle_cinema("Steinkjer"))
+  observeEvent(input$badge_begge, updateSelectInput(session, "cinema", selected = ""))
 
   output$cinema_badges <- renderUI({
     selected <- input$cinema %||% ""
 
-    badge <- function(id, label) {
-      cls <- if (identical(selected, label)) "hero-badge hero-badge-active" else "hero-badge"
+    badge <- function(id, label, value) {
+      cls <- if (identical(selected, value)) "hero-badge hero-badge-active" else "hero-badge"
       actionLink(id, label, class = cls)
     }
 
     div(
       class = "hero-badges",
-      badge("badge_verdal", "Verdal"),
-      badge("badge_steinkjer", "Steinkjer")
+      badge("badge_begge", "Begge kinoene", ""),
+      badge("badge_verdal", "Verdal", "Verdal"),
+      badge("badge_steinkjer", "Steinkjer", "Steinkjer")
     )
   })
 
@@ -439,7 +441,7 @@ server <- function(input, output, session) {
     selectInput(
       "cinema",
       "Kino",
-      choices = c("Alle kinoer" = "", cinemas),
+      choices = c("Begge kinoene" = "", cinemas),
       selected = input$cinema %||% ""
     )
   })
