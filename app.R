@@ -269,12 +269,6 @@ ui <- fluidPage(
         align-items: center;
       }
 
-      .hero-mark img {
-        display: block;
-        width: 70%;
-        height: 70%;
-      }
-
       .hero-badges a.hero-badge {
         cursor: pointer;
         text-decoration: none;
