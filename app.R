@@ -7,7 +7,7 @@ library(shinyseo)
 csv_file <- "barnefilmer_kino.csv"
 omtaler_file <- "film_omtaler.json"
 
-app_meta <- yaml::read_yaml("meta.yaml")
+app_meta <- yaml::read_yaml("meta.yml")
 app_meta$url   <- Sys.getenv("KINO_BARN_URL",   app_meta$url)
 app_meta$image <- Sys.getenv("KINO_BARN_IMAGE", app_meta$image)
 app_title <- app_meta$title
