@@ -309,8 +309,7 @@ ui <- fluidPage(
       div(
         class = "hero-badges",
         span(class = "hero-badge", "Verdal"),
-        span(class = "hero-badge", "Steinkjer"),
-        span(class = "hero-badge", "CSV + omtaler")
+        span(class = "hero-badge", "Steinkjer")
       )
     ),
     div(
