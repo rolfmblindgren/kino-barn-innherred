@@ -51,6 +51,7 @@ jobs:
             --exclude '.Rproj.user' \
             --exclude '.Rhistory' \
             --exclude '.RData' \
+            --exclude '__pycache__' \
             ${DEPLOY_USER}@${DEPLOY_HOST}:/srv/shiny-server/${APP_NAME}/
 
       - name: Restart Shiny Server
