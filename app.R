@@ -64,6 +64,15 @@ ui <- fluidPage(
     tags$meta(name = "apple-mobile-web-app-capable", content = "yes"),
     tags$meta(name = "apple-mobile-web-app-status-bar-style", content = "black-translucent"),
     tags$meta(name = "apple-mobile-web-app-title", content = app_meta$title),
+    tags$script(HTML("
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('sw.js').catch(function (err) {
+            console.warn('Kunne ikke registrere service worker:', err);
+          });
+        });
+      }
+    ")),
     grendelshiny::grendelshiny_css(),
     grendelshiny::grendelshiny_js(),
     tags$script(HTML("
