@@ -272,12 +272,21 @@ ui <- fluidPage(
       .hero-mark {
         display: flex;
         align-items: center;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        border-radius: 0;
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0;
       }
 
       .hero-mark img {
         display: block;
         height: 48px;
         width: auto;
+        max-width: none;
       }
 
       .hero-badges a.hero-badge {
