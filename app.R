@@ -265,6 +265,24 @@ ui <- fluidPage(
         align-self: start;
       }
 
+      .hero-mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+        background: #176b5f;
+        box-shadow: none;
+      }
+
+      .hero-mark span {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
       .film-badge-new {
         display: inline-block;
         padding: 2px 8px;
