@@ -6,4 +6,5 @@ image: https://shiny.grendel.no/kino-barn-innherred/share.png
 site_name: Grendel
 locale: nb_NO
 favicon: /kino-barn-innherred/favicon.svg
+favicon_png: "/kino-barn-innherred/favicon-32.png"
 theme_color: '#176b5f'
