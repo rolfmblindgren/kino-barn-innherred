@@ -2,7 +2,8 @@ title: Barnefilmer i Verdal og Steinkjer
 description: |
   Oppdatert oversikt over barne- og ungdomsfilmer på Verdal kino og Steinkjer kino, med dato, klokkeslett, sal og korte norske filmomtaler.
 url: https://shiny.grendel.no/kino-barn-innherred
-image: https://shiny.grendel.no/kino-barn-innherred/share.png
+image: https://shiny.grendel.no/kino-barn-innherred/share.svg
+image_type: image/svg+xml
 site_name: Grendel
 locale: nb_NO
 favicon: /kino-barn-innherred/favicon.svg
