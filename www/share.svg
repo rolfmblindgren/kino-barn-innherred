@@ -1,63 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Kino Barn</title>
-  <desc id="desc">Barnefilmer i Verdal og Steinkjer</desc>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630' role='img' aria-labelledby='title desc'>
+  <title id='title'>Kino Barn</title>
+  <desc id='desc'>Barnefilm med mer kinofølelse</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#176b5f"/>
-      <stop offset="100%" stop-color="#0d1f34"/>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#102946'/>
+      <stop offset='55%' stop-color='#176b5f'/>
+      <stop offset='100%' stop-color='#ff6b6b'/>
     </linearGradient>
-    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.06"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f9d66c"/>
-      <stop offset="100%" stop-color="#ff6b6b"/>
+    <linearGradient id='glass' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#ffffff' stop-opacity='.18'/>
+      <stop offset='100%' stop-color='#ffffff' stop-opacity='.06'/>
     </linearGradient>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <circle cx="1040" cy="100" r="220" fill="#f9d66c" opacity="0.14"/>
-  <circle cx="980" cy="548" r="300" fill="#ff6b6b" opacity="0.11"/>
-  <path d="M0 470 C190 395, 340 560, 540 492 S920 390, 1200 500 L1200 630 L0 630 Z" fill="rgba(255,255,255,0.05)"/>
-  <g transform="translate(68,70)">
-    <rect width="500" height="490" rx="36" fill="url(#panel)" stroke="rgba(255,255,255,0.16)"/>
-    <rect x="30" y="28" width="200" height="34" rx="17" fill="rgba(255,255,255,0.11)" stroke="rgba(255,255,255,0.16)"/>
-    <text x="130" y="51" text-anchor="middle" fill="#f5fffe" font-size="14" font-weight="800" letter-spacing="1.3">FILM OG TIDER</text>
-    <text x="30" y="126" fill="#f7fffd" font-size="66" font-weight="900" letter-spacing="-1.8">Kino Barn</text>
-    <text x="30" y="186" fill="#ecfffb" font-size="27" font-weight="700">Oversikt over barne- og familiefilm</text>
-    <text x="30" y="226" fill="rgba(247,255,253,0.82)" font-size="18" font-weight="500">Dato, klokkeslett, sal og korte omtaler samlet i én enkel visning.</text>
-    <g transform="translate(30,314)">
-      <g transform="translate(0,0)"><rect x="0" y="0" rx="16" width="126" height="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.16)"/><text x="63" y="22" text-anchor="middle" fill="#f7fffd" font-size="14" font-weight="700">Barn</text></g>
-      <g transform="translate(138,0)"><rect x="0" y="0" rx="16" width="126" height="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.16)"/><text x="63" y="22" text-anchor="middle" fill="#f7fffd" font-size="14" font-weight="700">Verdal</text></g>
-      <g transform="translate(276,0)"><rect x="0" y="0" rx="16" width="126" height="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.16)"/><text x="63" y="22" text-anchor="middle" fill="#f7fffd" font-size="14" font-weight="700">Steinkjer</text></g>
+  <rect width='1200' height='630' fill='url(#bg)'/>
+  <circle cx='1040' cy='108' r='220' fill='#f9d66c' opacity='.14'/>
+  <circle cx='980' cy='548' r='280' fill='#ff6b6b' opacity='.10'/>
+  <path d='M0 476 C190 402, 340 558, 540 494 S920 390, 1200 506 L1200 630 L0 630 Z' fill='rgba(255,255,255,.05)'/>
+
+  <g transform='translate(70 72)'>
+    <rect width='480' height='486' rx='38' fill='url(#glass)' stroke='rgba(255,255,255,.18)'/>
+    <text x='32' y='56' fill='#fff' font-size='14' font-weight='800' letter-spacing='1.4'>FILM OG TIDER</text>
+    <text x='32' y='132' fill='#fff' font-size='74' font-weight='900' letter-spacing='-2'>Kino Barn</text>
+    <text x='32' y='190' fill='#effffb' font-size='26' font-weight='700'>Barn og familiefilm samlet på ett sted</text>
+    <text x='32' y='228' fill='rgba(255,255,255,.82)' font-size='18'>Tid, sal og korte omtaler uten leting og rot.</text>
+
+    <g transform='translate(34 292)'>
+      <rect width='120' height='34' rx='17' fill='rgba(255,255,255,.10)'/><text x='60' y='23' text-anchor='middle' fill='#fff' font-size='14' font-weight='700'>Barn</text>
+      <g transform='translate(134 0)'><rect width='120' height='34' rx='17' fill='rgba(255,255,255,.10)'/><text x='60' y='23' text-anchor='middle' fill='#fff' font-size='14' font-weight='700'>Verdal</text></g>
+      <g transform='translate(268 0)'><rect width='120' height='34' rx='17' fill='rgba(255,255,255,.10)'/><text x='60' y='23' text-anchor='middle' fill='#fff' font-size='14' font-weight='700'>Steinkjer</text></g>
     </g>
   </g>
-  <g transform="translate(636,82)">
-    <rect width="498" height="466" rx="40" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)"/>
-    <rect x="26" y="24" width="128" height="30" rx="15" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.16)"/>
-    <text x="90" y="44" text-anchor="middle" fill="#f7fffd" font-size="13" font-weight="800">Shiny app</text>
-    <g transform="translate(40,72)">
-      <rect x="0" y="0" width="418" height="324" rx="28" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)"/>
-      <g transform="translate(18,26)">
-        <rect x="0" y="0" width="250" height="166" rx="24" fill="#0d1f34" stroke="#f9d66c" stroke-width="5"/>
-        <rect x="18" y="18" width="214" height="130" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.18)"/>
-        <polygon points="104,48 104,104 152,76" fill="#f9d66c"/>
-        <circle cx="56" cy="40" r="8" fill="#ff6b6b"/>
-        <circle cx="194" cy="40" r="8" fill="#ff6b6b"/>
-        <circle cx="56" cy="122" r="8" fill="#ff6b6b"/>
-        <circle cx="194" cy="122" r="8" fill="#ff6b6b"/>
+
+  <g transform='translate(648 82)'>
+    <rect width='490' height='466' rx='40' fill='rgba(255,255,255,.08)' stroke='rgba(255,255,255,.16)'/>
+    <rect x='28' y='24' width='128' height='30' rx='15' fill='rgba(255,255,255,.10)'/>
+    <text x='92' y='45' text-anchor='middle' fill='#fff' font-size='13' font-weight='800'>Shiny app</text>
+
+    <g transform='translate(34 66)'>
+      <rect width='422' height='330' rx='28' fill='rgba(10,18,30,.40)' stroke='rgba(255,255,255,.14)'/>
+
+      <g transform='translate(22 24)'>
+        <rect width='252' height='168' rx='24' fill='#0d1f34' stroke='#f9d66c' stroke-width='5'/>
+        <rect x='18' y='18' width='216' height='132' rx='18' fill='rgba(255,255,255,.04)' stroke='rgba(255,255,255,.18)'/>
+        <polygon points='102,46 102,106 154,76' fill='#f9d66c'/>
+        <circle cx='54' cy='40' r='8' fill='#ff6b6b'/>
+        <circle cx='198' cy='40' r='8' fill='#ff6b6b'/>
+        <circle cx='54' cy='122' r='8' fill='#ff6b6b'/>
+        <circle cx='198' cy='122' r='8' fill='#ff6b6b'/>
+        <rect x='76' y='118' width='100' height='18' rx='9' fill='#63f2df' opacity='.88'/>
+        <text x='126' y='131' text-anchor='middle' fill='#0d1f34' font-size='12' font-weight='900'>Familiefilm</text>
       </g>
-      <g transform="translate(286,22)">
-        <path d="M36 38 C36 18, 56 8, 72 22 C84 8, 104 18, 104 38 C104 60, 72 84, 72 84 C72 84, 36 60, 36 38Z" fill="#f9d66c"/>
-        <path d="M36 38 L104 38" stroke="#ff6b6b" stroke-width="6" stroke-linecap="round"/>
-        <text x="70" y="132" text-anchor="middle" fill="#f7fffd" font-size="18" font-weight="800">Popcorn</text>
-        <rect x="8" y="148" width="124" height="54" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)"/>
-        <text x="70" y="180" text-anchor="middle" fill="#f7fffd" font-size="17" font-weight="800">Familiefilm</text>
+
+      <g transform='translate(296 28)'>
+        <circle cx='46' cy='42' r='30' fill='#f9d66c'/>
+        <path d='M28 42 H64' stroke='#0d1f34' stroke-width='8' stroke-linecap='round'/>
+        <path d='M45 24 L45 60' stroke='#0d1f34' stroke-width='8' stroke-linecap='round'/>
+        <text x='46' y='110' text-anchor='middle' fill='#fff' font-size='18' font-weight='800'>Popcorn</text>
+        <path d='M20 130 C34 112, 58 112, 72 130' fill='none' stroke='#63f2df' stroke-width='6' stroke-linecap='round'/>
+        <rect x='6' y='146' width='80' height='52' rx='18' fill='rgba(255,255,255,.08)' stroke='rgba(255,255,255,.14)'/>
+        <text x='46' y='177' text-anchor='middle' fill='#fff' font-size='16' font-weight='800'>Klart</text>
       </g>
-      <rect x="20" y="212" width="368" height="62" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)"/>
-      <text x="44" y="248" fill="#f7fffd" font-size="18" font-weight="800">Ryddig visning av kinotidene</text>
-      <text x="44" y="270" fill="rgba(247,255,253,0.76)" font-size="14">for folk som vil ha det enkelt</text>
+
+      <rect x='22' y='220' width='378' height='66' rx='18' fill='rgba(255,255,255,.08)' stroke='rgba(255,255,255,.14)'/>
+      <text x='44' y='258' fill='#fff' font-size='20' font-weight='800'>Ryddig kinovisning for små og store</text>
+      <text x='44' y='280' fill='rgba(255,255,255,.76)' font-size='14'>en enkel ting å sjekke før turen</text>
     </g>
   </g>
 </svg>
