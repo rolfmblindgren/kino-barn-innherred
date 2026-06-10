@@ -1,16 +1,21 @@
-name: deploy-nyttekalkulator
+name: deploy-shiny
 
 on:
   push:
     branches: ["main", "master"]
   workflow_dispatch:
 
+# Aldri to deployer samtidig mot samme appmappe; ikke avbryt en
+# pågående rsync (halvsynket mappe), la neste vente i kø.
+concurrency:
+  group: deploy-shiny
+  cancel-in-progress: false
+
 env:
   APP_NAME: ${{ github.event.repository.name }}
   DEPLOY_HOST: ${{ vars.DEPLOY_HOST || 'dnsgrendel.grendel.no' }}
   DEPLOY_USER: ${{ vars.DEPLOY_USER || 'deployshiny' }}
   DEPLOY_GROUP: ${{ vars.DEPLOY_GROUP || 'shinyapps' }}
-  SHINY_SERVICE: ${{ vars.SHINY_SERVICE || 'shiny-server' }}
 
 jobs:
   deploy:
@@ -20,18 +25,17 @@ jobs:
       - name: Sjekk ut kode
         uses: actions/checkout@v6
 
-      - name: Sjekk deploy-variabler
-        run: |
-          : "${DEPLOY_HOST:?Set repository variable DEPLOY_HOST or use the default}"
-          : "${DEPLOY_USER:?Set repository variable DEPLOY_USER or use the default}"
-          : "${SHINY_SERVICE:?Set repository variable SHINY_SERVICE or use the default}"
-
       - name: Sett opp SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SHINY_DEPLOY_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H "${DEPLOY_HOST}" >> ~/.ssh/known_hosts
+          # Fastlåst host-nøkkel i stedet for ssh-keyscan ved hver kjøring,
+          # slik at en MITM ikke kan utgi seg for serveren.
+          cat >> ~/.ssh/known_hosts <<'EOF'
+          dnsgrendel.grendel.no ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOphXE9rQhtZ6ityzpwJa0/tDCpErk0jXic7vziXMtc9
+          dnsgrendel.grendel.no ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGCQidzMfw8Hy6Gu7IWre5wvM6SCg/Ams64wMOexl/50UGZMUNOzM0pQ8HVmoISSalHn1X44ew7ztrRAH0LGft0=
+          EOF
 
       - name: Sørg for at appmappa finnes
         run: |
@@ -40,6 +44,8 @@ jobs:
 
       - name: Synkroniser appfiler til server
         run: |
+          # Ekskluderte stier er også beskyttet mot --delete, så
+          # server-side kataloger som app_cache/ overlever deployen.
           rsync -avz --delete \
             --mkpath \
             ./ \
@@ -51,9 +57,17 @@ jobs:
             --exclude '.Rproj.user' \
             --exclude '.Rhistory' \
             --exclude '.RData' \
+            --exclude '.env' \
             --exclude '__pycache__' \
+            --exclude 'app_cache/' \
+            --exclude 'logs/' \
+            --exclude 'restart.txt' \
             ${DEPLOY_USER}@${DEPLOY_HOST}:/srv/shiny-server/${APP_NAME}/
 
-      - name: Restart Shiny Server
+      - name: Last appen på nytt
         run: |
-          ssh "${DEPLOY_USER}@${DEPLOY_HOST}" "sudo systemctl restart ${SHINY_SERVICE}"
+          # touch restart.txt får Shiny Server til å laste bare denne
+          # appen på nytt -- en full systemctl restart ville kastet ut
+          # aktive brukere i alle appene på serveren.
+          ssh "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "touch /srv/shiny-server/${APP_NAME}/restart.txt"
